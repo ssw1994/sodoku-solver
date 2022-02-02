@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
-
+import logo from "./logo.svg";
+import "./App.css";
+import {
+  Routes,
+  Route,
+  Link,
+  BrowserRouter as Router,
+  Outlet,
+} from "react-router-dom";
+import Sudoku from "./Sudoku/Sudoku";
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const divStyle = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "25px",
+    margin: "25px",
+  };
+  return [
+    <Router>
+      <div style={divStyle}>
+        <Link to="/sudoku" exact="true">
+          Sudoku
+        </Link>
+      </div>
+      <Routes
+        path="/"
+        element={
+          <div className="outlet" style={divStyle}>
+            <Outlet />
+          </div>
+        }
+      >
+        <Route path="/sudoku" element={<Sudoku />}></Route>
+      </Routes>
+    </Router>,
+  ];
 }
 
 export default App;
